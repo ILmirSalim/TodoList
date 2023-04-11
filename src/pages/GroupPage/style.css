@@ -1,0 +1,51 @@
+.taskItem {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+    justify-content: space-around;
+    width: 400px;
+}
+.ulTask {
+    padding-bottom: 10px;
+    padding-right: 15px;
+}
+.form {
+    display: flex;
+    margin-top: 50px;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.inputForm {
+    padding: 5px;
+    text-align: center;
+    box-shadow: -5px -5px 5px -5px;
+    outline: none;
+    cursor: pointer;
+}
+
+.groupName {
+    text-align: center;
+}
+
+.textGroup {
+    padding-left: 10px;
+    padding-top: 5px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.taskText {
+    margin-right: 70px;
+}
+
+.deadline {
+    padding: 10px;
+    margin-left: -70px;
+    font-weight: 700;
+}
+
+.wrapperGroup {
+    box-shadow: 0 0 5px 2px;
+}
+
