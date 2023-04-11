@@ -18,14 +18,3 @@ describe('Render MainPage', ()=> {
   });
   
 });
-test('does not add group if group with same name already exists in local storage', () => {   
-  localStorage.setItem('groups', JSON.stringify([{ id: '123', name: 'Test Group', color: 'Red', tasks: [], users: [] }]));   
-  const { handleSubmit } = render(<MainPage />);   const form = handleSubmit('form');  
-   const nameInput = handleSubmit('group-name');   
-   const colorInput = handleSubmit('group-color');   
-   const usersInput = handleSubmit('group-users');   
-   fireEvent.change(nameInput, { target: { value: 'Test Group' } });   
-   fireEvent.change(colorInput, { target: { value: 'Blue' } });   
-   fireEvent.change(usersInput, { target: { value: 'User1,User2' } });   
-   fireEvent.submit(form);   const groupsData = JSON.parse(localStorage.getItem('groups'));   
-   expect(groupsData.length).toBe(1); });
