@@ -1,0 +1,26 @@
+.textGroup {
+    padding-left: 10px;
+    padding-top: 5px;
+    font-size: 20px;
+    font-weight: 700;
+}
+.wrapperGroup {
+    box-shadow: 0 0 5px 2px;
+}
+.taskItem {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+    justify-content: space-around;
+    width: 400px;
+}
+.ulTask {
+    padding-bottom: 10px;
+    padding-right: 15px;
+}
+
+.deadline {
+    padding: 10px;
+    margin-left: -70px;
+    font-weight: 700;
+}
