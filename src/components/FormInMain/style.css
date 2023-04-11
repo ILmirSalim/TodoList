@@ -1,0 +1,19 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputMain {
+    margin-left: 10px;
+    outline: none;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    align-items: center;
+}
+
+.labelContainer {
+    display: flex;
+    text-align: center;
+    align-items: center;
+}

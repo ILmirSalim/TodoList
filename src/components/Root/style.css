@@ -1,0 +1,22 @@
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+.linkMain {
+    padding: 40px;
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.linkMain:hover{
+    transform: scale(1.1);
+}
+
+.outlet {
+    display: flex;
+    justify-content: center;
+}
+
