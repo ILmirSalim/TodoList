@@ -2,7 +2,7 @@ import React from "react"
 import { Button } from "../ui-components/Button"
 import './style.css'
 
-export const FormInMain = ({handleSubmit, onChange, group, handleUserChange, users, disabled}) => {
+export const CreateGroupForm = ({handleSubmit, onChange, group, handleUserChange, users, disabled}) => {
     return (
         
       <form className='wrapper' onSubmit={handleSubmit}>
@@ -28,6 +28,7 @@ export const FormInMain = ({handleSubmit, onChange, group, handleUserChange, use
             placeholder='Name users'
             value={users}
             onChange={handleUserChange} />
+            <div data-title="Use the:  ,  symbol to add multiple users"  className="info">i</div>
         </label>
 
         <Button disabled={disabled} type="submit">Create Group</Button>
