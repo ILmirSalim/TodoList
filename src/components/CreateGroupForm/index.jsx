@@ -2,13 +2,14 @@ import React from "react"
 import { Button } from "../ui-components/Button"
 import './style.css'
 
-export const CreateGroupForm = ({handleSubmit, onChange, group, handleUserChange, users, disabled}) => {
+export const CreateGroupForm = ({handleSubmit, onChange, group, handleUserChange, users, disabled, inputRef}) => {
     return (
         
       <form className='wrapper' onSubmit={handleSubmit}>
         <label className='labelContainer'>
           <h2>Name group:</h2>
           <input className='inputMain' type="text"
+            ref={inputRef}
             name="name"
             placeholder='name group'
             value={group.name}

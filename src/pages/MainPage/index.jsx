@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { CreateGroupForm } from '../../components/CreateGroupForm';
 import { GroupList } from '../../components/GroupList';
 import { createGroup } from '../../helpers/index'
@@ -13,6 +13,8 @@ export const MainPage = () => {
     color: 'black',
     tasks: []
   })
+
+  const inputRef = useRef()
   
   const onChange = (name, value) => {
     setGroup({ ...group, [name]: value })
@@ -32,6 +34,7 @@ export const MainPage = () => {
     if (groupData) {
       setGropsData(groupData);
     }
+    inputRef.current.focus()
   }, [])
 
   const disabled = !group.name
@@ -44,6 +47,7 @@ export const MainPage = () => {
         users={users}
         handleUserChange={handleUserChange}
         disabled={disabled}
+        inputRef={inputRef}
       />
       <GroupList groupsData={groupsData}
       />
