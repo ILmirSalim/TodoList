@@ -1,0 +1,41 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputMain {
+    margin-left: 10px;
+    outline: none;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    position: relative;
+}
+
+.labelContainer {
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+.info {
+    border-radius: 10px;
+    font-weight: 700;
+    width: 18px;
+    height: 20px;
+    position: relative;
+    border: 1px solid #333; 
+}
+.info:hover::after {
+    width: 200px;
+    height: 50px;
+    content: attr(data-title); /* Выводим текст */
+    position: absolute; /* Абсолютное позиционирование */
+    left: 90%; top: 30%; /* Положение подсказки */
+    z-index: 1; /* Отображаем подсказку поверх других элементов */
+    background: rgba(255,255,230,0.9); 
+    font-family: Arial, sans-serif; 
+    font-size: 20px; 
+    padding: 5px 10px; 
+    border: none;
+   }

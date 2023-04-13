@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { FormInMain } from '../../components/FormInMain';
+import { CreateGroupForm } from '../../components/CreateGroupForm';
 import { GroupList } from '../../components/GroupList';
-import {GROUPS} from '../../constants/index'
+import { createGroup } from '../../helpers/index'
+import { GROUPS } from '../../constants/index'
 import './style.css'
 
 export const MainPage = () => {
@@ -9,7 +10,7 @@ export const MainPage = () => {
   const [users, setUsers] = useState([])
   const [group, setGroup] = useState({
     name: '',
-    color: '',
+    color: 'black',
     tasks: []
   })
   
@@ -23,32 +24,7 @@ export const MainPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const userId = Date.now()
-    const newGroup = { id: userId, users: users, ...group }
-
-    try {
-      const groupData = JSON.parse(localStorage.getItem(GROUPS))
-
-      if (!groupData) {
-        localStorage.setItem(GROUPS, JSON.stringify([newGroup]))
-        setGropsData([newGroup])
-        alert('Вы успешно добавили группу!')
-        return
-      }
-      if (groupData.find((user) => user.name === group.name)) {
-        alert('Группа с таким именем уже существует!')
-        return
-      }
-
-      groupData.push(newGroup)
-      localStorage.setItem(GROUPS, JSON.stringify(groupData))
-      setGropsData([newGroup, ...groupsData])
-      alert('Вы успешно добавили группу!')
-
-    } catch (error) {
-      console.log(error)
-    }
+    createGroup(users, setGropsData, groupsData, group)
   };
 
   useEffect(() => {
@@ -58,18 +34,19 @@ export const MainPage = () => {
     }
   }, [])
 
-  const disabled = !group.name || !group.color
+  const disabled = !group.name
 
   return (
     <div>
-      <FormInMain handleSubmit={handleSubmit}
-      group={group}
-      onChange={onChange}
-      users={users}
-      handleUserChange={handleUserChange}
-      disabled={disabled}
+      <CreateGroupForm handleSubmit={handleSubmit}
+        group={group}
+        onChange={onChange}
+        users={users}
+        handleUserChange={handleUserChange}
+        disabled={disabled}
       />
-      <GroupList groupsData={groupsData} />
+      <GroupList groupsData={groupsData}
+      />
     </div>
   );
 };

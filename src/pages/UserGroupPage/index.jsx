@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Input } from '../../components/ui-components/Input/Index';
+import { Link } from 'react-router-dom';
 import { GROUPS } from '../../constants/index'
 
 export const UserGroupPage = () => {
@@ -14,20 +15,21 @@ export const UserGroupPage = () => {
     const groups = localStorage.getItem(GROUPS);
     if (groups) {
       const parsedGroups = JSON.parse(groups);
-      console.log(parsedGroups);
       const userGroups = parsedGroups.filter((group) => group.users.indexOf(userName) >= 0);
       setUserGroups(userGroups);
     }
-    
+
   }, [userName]);
-  
+
   return (
     <div>
       <h2>My groups:</h2>
-      <Input onChange={onChange} value={userName} placeholder='Введите имя пользователя' />
+      <Input onChange={onChange} value={userName} placeholder='Enter user name...' />
       <div>
         {userName && userGroups.map((group) => (
-          <div style={{ color: group.color }} key={group.id}>{group.name}</div>
+          <Link className='linkMain' key={group.id} to={`/group/${group.id}`}>
+            <div style={{ color: group.color }} key={group.id}>{group.name}</div>
+          </Link>
         ))}
       </div>
     </div>
