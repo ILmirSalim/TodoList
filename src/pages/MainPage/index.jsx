@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { CreateGroupForm } from '../../components/CreateGroupForm';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { GroupList } from '../../components/GroupList';
-import { createGroup } from '../../helpers/index'
+import { deleteGroup } from './helpers/index'
+import { createGroup } from './helpers/index'
 import { GROUPS } from '../../constants/index'
 import './style.css'
 
@@ -14,8 +16,10 @@ export const MainPage = () => {
     tasks: []
   })
 
+  const { getItemInLS, setItemInLS } = useLocalStorage(GROUPS)
+
   const inputRef = useRef()
-  
+
   const onChange = (name, value) => {
     setGroup({ ...group, [name]: value })
   };
@@ -26,18 +30,22 @@ export const MainPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createGroup(users, setGropsData, groupsData, group)
+    createGroup(users, setGropsData, groupsData, group, getItemInLS, setItemInLS)
+  };
+
+  const handleDeleteGroup = (groupId) => {
+    deleteGroup(groupId, setGropsData, getItemInLS, setItemInLS)
   };
 
   useEffect(() => {
-    const groupData = JSON.parse(localStorage.getItem(GROUPS));
+    const groupData = getItemInLS();
     if (groupData) {
       setGropsData(groupData);
     }
     inputRef.current.focus()
-  }, [])
+  }, [getItemInLS])
 
-  const disabled = !group.name
+  const disabled = !group.name || users.length === 0
 
   return (
     <div>
@@ -50,6 +58,7 @@ export const MainPage = () => {
         inputRef={inputRef}
       />
       <GroupList groupsData={groupsData}
+        handleDeleteGroup={handleDeleteGroup}
       />
     </div>
   );
