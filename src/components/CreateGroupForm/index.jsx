@@ -3,7 +3,8 @@ import { Button } from "../ui-components/Button"
 import './style.css'
 
 export const CreateGroupForm = ({handleSubmit, onChange, group, handleUserChange, users, disabled, inputRef}) => {
-    return (
+  
+  return (
         
       <form className='wrapper' onSubmit={handleSubmit}>
         <label className='labelContainer'>

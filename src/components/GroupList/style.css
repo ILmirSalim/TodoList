@@ -9,12 +9,16 @@
     text-decoration: none;
     box-shadow: 0 0 5px 2px;
     transition: 0.2s;
+    width: 200px;
 }
 
 .elemMain:hover {
-    transform: scale(1.2);
-  }
+    transform: scale(1.1);
+}
 
-.linkMain{
+.linkMain {
     text-decoration: none;
+    display: inline-block;
+    margin-right: -20px;
+    margin-top: -20px;
 }

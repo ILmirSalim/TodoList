@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { Button } from '../../components/ui-components/Button';
-import { modifyProcess } from '../../helpers';
-import { finishTask } from '../../helpers';
-import { pushTask } from '../../helpers';
+import { modifyProcess } from './helpers/index';
 import { GROUPS } from '../../constants/index'
+import { deleteTask } from './helpers/index';
+import { finishTask } from './helpers/index';
+import { pushTask } from './helpers/index';
 import { TaskList } from './TaskList';
 import { AddTask } from './AddTask';
-import { deleteTask } from '../../helpers';
 import '../GroupPage/style.css'
 
 export const GroupPage = () => {
@@ -17,32 +18,34 @@ export const GroupPage = () => {
   const [newTaskDeadline, setNewTaskDeadline] = useState('');
 
   const navigate = useNavigate()
+  const { getItemInLS, setItemInLS } = useLocalStorage(GROUPS)
 
   const goBack = () => {
     navigate('/')
   }
 
   const changeProcess = useCallback((taskId) => {
-    modifyProcess(groupId, taskId, setGroup)
-  }, [groupId])
+    modifyProcess(groupId, taskId, setGroup, getItemInLS, setItemInLS)
+  }, [groupId, getItemInLS, setItemInLS])
 
   const addTask = useCallback(() => {
-    pushTask(newTaskText, newTaskDeadline, groupId, setGroup)
-  }, [groupId, newTaskDeadline, newTaskText]);
+    pushTask(newTaskText, newTaskDeadline, groupId, setGroup, getItemInLS, setItemInLS)
+  }, [groupId, newTaskDeadline, newTaskText, getItemInLS, setItemInLS]);
 
   const completeTask = useCallback((taskId) => {
-    finishTask(groupId, taskId, setGroup)
-  }, [groupId]);
+    finishTask(groupId, taskId, setGroup, getItemInLS, setItemInLS)
+  }, [groupId, getItemInLS, setItemInLS]);
 
   const taskDelete = useCallback((taskId) => {
-    deleteTask(taskId, setGroup, groupId)
-  }, [groupId]);
+    deleteTask(taskId, setGroup, groupId, getItemInLS, setItemInLS)
+  }, [groupId, getItemInLS, setItemInLS]);
 
   useEffect(() => {
-    const groupData = JSON.parse(localStorage.getItem(GROUPS));
+    const groupData = getItemInLS();
     const currentGroup = groupData.find((group) => group.id === Number(groupId)); // поиск группы по groupId
     setGroup(currentGroup);
-  }, [groupId]);
+
+  }, [groupId, getItemInLS]);
 
   return (
     <div>
