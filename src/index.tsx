@@ -1,13 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import { Root } from './components/Root/index';
 import { GroupPage } from './pages/GroupPage/index';
 import { UserGroupPage } from './pages/UserGroupPage/index';
@@ -32,11 +30,12 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
 );
 
-reportWebVitals();

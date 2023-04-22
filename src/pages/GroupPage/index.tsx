@@ -1,21 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { deleteTask, finishTask, pushTask, modifyProcess } from './helpers/index';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { Button } from '../../components/ui-components/Button';
-import { modifyProcess } from './helpers/index';
 import { GROUPS } from '../../constants/index'
-import { deleteTask } from './helpers/index';
-import { finishTask } from './helpers/index';
-import { pushTask } from './helpers/index';
 import { TaskList } from './TaskList';
 import { AddTask } from './AddTask';
+import { Group } from '../../models';
 import '../GroupPage/style.css'
 
-export const GroupPage = () => {
-  const { groupId } = useParams(); // получение groupId из URL-адреса
-  const [group, setGroup] = useState(null); // состояние для хранения данных о группе
-  const [newTaskText, setNewTaskText] = useState('')
-  const [newTaskDeadline, setNewTaskDeadline] = useState('');
+export const GroupPage: React.FC = () => {
+  const { groupId } = useParams<{ groupId: string }>(); // получение groupId из URL-адреса
+  const [group, setGroup] = useState<Group | null>(null); // состояние для хранения данных о группе
+  const [newTaskText, setNewTaskText] = useState<string>('')
+  const [newTaskDeadline, setNewTaskDeadline] = useState<string>('');
 
   const navigate = useNavigate()
   const { getItemInLS, setItemInLS } = useLocalStorage(GROUPS)
@@ -24,26 +22,26 @@ export const GroupPage = () => {
     navigate('/')
   }
 
-  const changeProcess = useCallback((taskId) => {
-    modifyProcess(groupId, taskId, setGroup, getItemInLS, setItemInLS)
+  const changeProcess = useCallback((taskId: number) => {
+    modifyProcess(groupId!, taskId, setGroup, getItemInLS, setItemInLS)
   }, [groupId, getItemInLS, setItemInLS])
 
   const addTask = useCallback(() => {
-    pushTask(newTaskText, newTaskDeadline, groupId, setGroup, getItemInLS, setItemInLS)
+    pushTask(newTaskText, newTaskDeadline, groupId!, setGroup, getItemInLS, setItemInLS)
   }, [groupId, newTaskDeadline, newTaskText, getItemInLS, setItemInLS]);
 
-  const completeTask = useCallback((taskId) => {
-    finishTask(groupId, taskId, setGroup, getItemInLS, setItemInLS)
+  const completeTask = useCallback((taskId: number) => {
+    finishTask(groupId!, taskId, setGroup, getItemInLS, setItemInLS)
   }, [groupId, getItemInLS, setItemInLS]);
 
-  const taskDelete = useCallback((taskId) => {
-    deleteTask(taskId, setGroup, groupId, getItemInLS, setItemInLS)
+  const taskDelete = useCallback((taskId: number) => {
+    deleteTask(taskId, setGroup, groupId!, getItemInLS, setItemInLS)
   }, [groupId, getItemInLS, setItemInLS]);
 
   useEffect(() => {
     const groupData = getItemInLS();
-    const currentGroup = groupData.find((group) => group.id === Number(groupId)); // поиск группы по groupId
-    setGroup(currentGroup);
+    const currentGroup = groupData?.find((group:Group) => group.id === Number(groupId)); // поиск группы по groupId
+    setGroup(currentGroup || null);
 
   }, [groupId, getItemInLS]);
 
@@ -75,4 +73,3 @@ export const GroupPage = () => {
 };
 
 export default GroupPage;
-
