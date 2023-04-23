@@ -2,11 +2,10 @@ import React, { useEffect, useState, useRef } from 'react';
 import { CreateGroupForm } from '../../components/CreateGroupForm';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { GroupList } from '../../components/GroupList';
-import { deleteGroup } from './helpers/index'
-import { createGroup } from './helpers/index'
-import { GROUPS } from '../../constants/index'
+import { deleteGroup, createGroup } from './helpers'
+import { GROUPS } from '../../constants'
+import { Group } from '../../interfaces';
 import './style.css'
-import { Group } from '../../models';
 
 const MainPage: React.FC = () => {
   const [groupsData, setGropsData] = useState<Group[]>([]);
@@ -31,11 +30,11 @@ const MainPage: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    createGroup(users, setGropsData, groupsData, group, getItemInLS, setItemInLS);
+    createGroup({users, setGropsData, groupsData, group, getItemInLS, setItemInLS});
   };
 
   const handleDeleteGroup = (groupId: number) => {
-    deleteGroup(groupId, setGropsData, getItemInLS, setItemInLS);
+    deleteGroup({groupId, setGropsData, getItemInLS, setItemInLS});
   };
 
   useEffect(() => {

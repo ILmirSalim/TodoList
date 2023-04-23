@@ -1,12 +1,11 @@
 import { useCallback } from "react";
 
-export function useLocalStorage(key:string) {
+export function useLocalStorage<T>(key:string) {
   const getItemInLS = useCallback(() => {
-    const itemInLs = JSON.parse(localStorage.getItem(key) || "null");
-    return itemInLs;
+    return JSON.parse(localStorage.getItem(key) || "null");
   }, [key]);
 
-  const setItemInLS = useCallback((item: any) => {
+  const setItemInLS = useCallback((item: T) => {
     localStorage.setItem(key, JSON.stringify(item));
   }, [key]);
 

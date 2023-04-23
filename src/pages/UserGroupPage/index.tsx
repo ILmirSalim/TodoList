@@ -1,9 +1,9 @@
 import React, { FC, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Input } from "../../components/ui-components/Input/Index";
+import { Input } from "../../components/ui-components/Input"
 import { useLocalStorage } from "../../hooks/useLocalStorage";
-import { GROUPS } from "../../constants/index";
-import { Group } from "../../models";
+import { GROUPS } from "../../constants";
+import { Group } from "../../interfaces";
 
 export const UserGroupPage: FC = () => {
   const [userGroups, setUserGroups] = useState<Group[]>([]);

@@ -1,4 +1,8 @@
-import React from "react";
+import React, { ButtonHTMLAttributes } from "react";
 import './style.css'
 
-export const Button = (props:any) => <button className="buttonMain" {...props}></button>
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
+
+export const Button: React.FC<ButtonProps> = (props) => (
+  <button className="buttonMain" {...props}></button>
+);

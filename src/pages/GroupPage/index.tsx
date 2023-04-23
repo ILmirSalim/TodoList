@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { deleteTask, finishTask, pushTask, modifyProcess } from './helpers/index';
+import { deleteTask, finishTask, pushTask, modifyProcess } from './helpers';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { Button } from '../../components/ui-components/Button';
-import { GROUPS } from '../../constants/index'
+import { GROUPS } from '../../constants'
 import { TaskList } from './TaskList';
 import { AddTask } from './AddTask';
-import { Group } from '../../models';
+import { Group } from '../../interfaces';
 import '../GroupPage/style.css'
 
 export const GroupPage: React.FC = () => {
-  const { groupId } = useParams<{ groupId: string }>(); // получение groupId из URL-адреса
+  const { groupId } = useParams<{ groupId : string}>(); // получение groupId из URL-адреса
   const [group, setGroup] = useState<Group | null>(null); // состояние для хранения данных о группе
   const [newTaskText, setNewTaskText] = useState<string>('')
   const [newTaskDeadline, setNewTaskDeadline] = useState<string>('');
@@ -23,19 +23,19 @@ export const GroupPage: React.FC = () => {
   }
 
   const changeProcess = useCallback((taskId: number) => {
-    modifyProcess(groupId!, taskId, setGroup, getItemInLS, setItemInLS)
+    modifyProcess({groupId, taskId, setGroup, getItemInLS, setItemInLS})
   }, [groupId, getItemInLS, setItemInLS])
 
   const addTask = useCallback(() => {
-    pushTask(newTaskText, newTaskDeadline, groupId!, setGroup, getItemInLS, setItemInLS)
+    pushTask({newTaskText, newTaskDeadline, groupId, setGroup, getItemInLS, setItemInLS})
   }, [groupId, newTaskDeadline, newTaskText, getItemInLS, setItemInLS]);
 
   const completeTask = useCallback((taskId: number) => {
-    finishTask(groupId!, taskId, setGroup, getItemInLS, setItemInLS)
+    finishTask({groupId, taskId, setGroup, getItemInLS, setItemInLS})
   }, [groupId, getItemInLS, setItemInLS]);
 
   const taskDelete = useCallback((taskId: number) => {
-    deleteTask(taskId, setGroup, groupId!, getItemInLS, setItemInLS)
+    deleteTask({taskId, setGroup, groupId, getItemInLS, setItemInLS})
   }, [groupId, getItemInLS, setItemInLS]);
 
   useEffect(() => {

@@ -6,9 +6,9 @@ import {
 } from "react-router-dom";
 import './index.css';
 import App from './App';
-import { Root } from './components/Root/index';
-import { GroupPage } from './pages/GroupPage/index';
-import { UserGroupPage } from './pages/UserGroupPage/index';
+import { Root } from './components/Root';
+import { GroupPage } from './pages/GroupPage';
+import { UserGroupPage } from './pages/UserGroupPage';
 
 const router = createBrowserRouter([
   {
