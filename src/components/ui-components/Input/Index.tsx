@@ -1,4 +1,7 @@
 import React from "react";
+import { InputHTMLAttributes } from "react";
 import './style.css'
 
-export const Input = (props:any) => <input className="inputWr" {...props} />
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
+
+export const Input = (props: InputProps) => <input className="inputWr" {...props} />;

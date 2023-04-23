@@ -1,12 +1,9 @@
 import React, { FC } from "react";
 import { Link } from 'react-router-dom';
-import { Group } from "../../models";
 import { Button } from "../ui-components/Button";
+import { GroupListProps } from "./interface";
 import './style.css'
-interface GroupListProps {
-    groupsData: Group[];
-    handleDeleteGroup: (id: number) => void;
-}
+
 export const GroupList: FC<GroupListProps> = ({ groupsData, handleDeleteGroup }) => {
     const hasGroup = groupsData && groupsData.length > 0;
     return (
