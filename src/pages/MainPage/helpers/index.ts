@@ -1,5 +1,6 @@
-import { Group } from "../../../interfaces";
-import { ICreateGroupProps, IDeleteGroupProps } from "./interface";
+import { Group } from "../../../interfaces/Group";
+import { ICreateGroupProps } from "./interfaces/createGroup";
+import { IDeleteGroupProps } from './interfaces/deleteGroup'
 
 export const createGroup = ({ users, setGropsData, groupsData, group, getItemInLS, setItemInLS }: ICreateGroupProps): void => {
   const userId = Date.now();
@@ -28,7 +29,7 @@ export const createGroup = ({ users, setGropsData, groupsData, group, getItemInL
   }
 };
 
-export const deleteGroup = ({groupId,setGropsData,getItemInLS,setItemInLS}:IDeleteGroupProps): void => {
+export const deleteGroup = ({ groupId, setGropsData, getItemInLS, setItemInLS }: IDeleteGroupProps): void => {
   const groupData = getItemInLS();
   const updatedGroups = groupData?.filter((group) => group.id !== groupId);
   setItemInLS(updatedGroups || []);

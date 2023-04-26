@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Input } from "../../components/ui-components/Input/Index"
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { GROUPS } from "../../constants";
-import { Group } from "../../interfaces";
+import { Group } from "../../interfaces/Group";
 
 export const UserGroupPage: FC = () => {
   const [userGroups, setUserGroups] = useState<Group[]>([]);

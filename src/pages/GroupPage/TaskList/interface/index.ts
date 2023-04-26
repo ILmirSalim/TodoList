@@ -1,4 +1,4 @@
-import { Group } from "../../../../interfaces";
+import { Group } from "../../../../interfaces/Group";
 
 export interface TaskListProps {
     group: Group;

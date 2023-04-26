@@ -4,10 +4,10 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { GroupList } from '../../components/GroupList';
 import { deleteGroup, createGroup } from './helpers'
 import { GROUPS } from '../../constants'
-import { Group } from '../../interfaces';
+import { Group } from '../../interfaces/Group';
 import './style.css'
 
-const MainPage: React.FC = () => {
+export const MainPage: React.FC = () => {
   const [groupsData, setGropsData] = useState<Group[]>([]);
   const [users, setUsers] = useState<string[]>([]);
   const [group, setGroup] = useState<Group>({
@@ -16,7 +16,7 @@ const MainPage: React.FC = () => {
     tasks: [],
   });
 
-  const { getItemInLS, setItemInLS } = useLocalStorage(GROUPS);
+  const { getItemInLS, setItemInLS } = useLocalStorage<Group[]>(GROUPS);
 
   const inputRef = useRef<HTMLInputElement>(null);
 

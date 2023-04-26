@@ -6,7 +6,7 @@ import { Button } from '../../components/ui-components/Button';
 import { GROUPS } from '../../constants'
 import { TaskList } from './TaskList';
 import { AddTask } from './AddTask';
-import { Group } from '../../interfaces';
+import { Group } from '../../interfaces/Group';
 import '../GroupPage/style.css'
 
 export const GroupPage: React.FC = () => {
@@ -16,7 +16,7 @@ export const GroupPage: React.FC = () => {
   const [newTaskDeadline, setNewTaskDeadline] = useState<string>('');
 
   const navigate = useNavigate()
-  const { getItemInLS, setItemInLS } = useLocalStorage(GROUPS)
+  const { getItemInLS, setItemInLS } = useLocalStorage<Group[]>(GROUPS)
 
   const goBack = () => {
     navigate('/')
