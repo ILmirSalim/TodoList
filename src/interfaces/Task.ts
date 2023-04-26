@@ -1,11 +1,3 @@
-export interface Group {
-    id?: number;
-    name: string;
-    tasks: Task[];
-    color: string;
-    users?: string[]
-  }
-
 export interface Task {
     id: number;
     text: string;
@@ -13,4 +5,3 @@ export interface Task {
     completed: boolean;
     inProcess: boolean;
 }
-  

@@ -1,6 +1,10 @@
-import { Group } from '../../../interfaces'
-import { Task } from '../../../interfaces'
-import { IDeleteTask, IFinishTaskProps, IGetCurGroup, IModifyProcessProps, IPushProps } from './interface';
+import { Group } from '../../../interfaces/Group'
+import { Task } from '../../../interfaces/Task'
+import { IDeleteTask } from './interfaces/deleteTask';
+import { IGetCurGroup } from './interfaces/getCurGroup'
+import { IModifyProcessProps } from './interfaces/modifyProcess'
+import { IPushProps } from './interfaces/pushTask'
+import { IFinishTaskProps } from './interfaces/finishTask'
 
 const getCurrentGroup = ({ groupId, getItemInLS }: IGetCurGroup) => {
   const groupData: Group[] | null = getItemInLS();
@@ -17,7 +21,7 @@ export const modifyProcess = ({ groupId, taskId, setGroup, getItemInLS, setItemI
   const currentGroup = getCurrentGroup({ groupId, getItemInLS })
 
   const currentTask = currentGroup?.currentGroup.tasks.find((task) => task.id === taskId);
-  
+
   if (!currentTask) return;
 
   currentTask.inProcess = true;

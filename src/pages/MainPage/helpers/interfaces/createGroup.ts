@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { Group } from "../../../../interfaces";
+import { Group } from "../../../../interfaces/Group";
 
 export interface ICreateGroupProps {
     users: string[],
@@ -10,9 +10,3 @@ export interface ICreateGroupProps {
     setItemInLS: (data: Group[]) => void
 }
 
-export interface IDeleteGroupProps {
-    groupId: number,
-    setGropsData: React.Dispatch<React.SetStateAction<Group[]>>,
-    getItemInLS: () => Group[] | null,
-    setItemInLS: (data: Group[]) => void
-}
